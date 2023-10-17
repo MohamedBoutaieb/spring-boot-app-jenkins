@@ -1,4 +1,5 @@
-FROM openjdk:11
+FROM eclipse-temurin:17-jdk-alpine
+VOLUME /tmp
+COPY target/*.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
 EXPOSE 8080
-ADD target/spring-boot-jenkins.jar spring-boot-jenkins.jar
-ENTRYPOINT ["java", "-jar", "spring-boot-jenkins.jar.jar"]
