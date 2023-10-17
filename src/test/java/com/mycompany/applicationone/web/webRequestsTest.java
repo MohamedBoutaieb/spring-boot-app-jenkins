@@ -22,7 +22,7 @@ public class webRequestsTest {
     private MockMvc mockMvc;
 
     @Test
-    void testTheEndpount() throws Exception {
+    void testTheEndpoint() throws Exception {
         mockMvc.perform(get("/api/v1/welcome"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Welcome to the world of Azure Containers!"));
