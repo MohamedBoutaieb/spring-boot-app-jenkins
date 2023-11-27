@@ -23,9 +23,10 @@ jobs:
         run: mvn -B package --file pom.xml
       - name: Run tests
         run: mvn test
+      - name: Create Jar
+        run: mvn compile
       - name: Debug
         run: |
-          
           
           echo "DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}"
           echo "DOCKERHUB_PWD: ${{ secrets.DOCKERHUB_PWD }}"
