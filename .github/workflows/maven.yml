@@ -33,5 +33,3 @@ jobs:
       with:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/spring-boot-jenkins:latest
-
-
