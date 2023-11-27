@@ -24,7 +24,7 @@ jobs:
       - name: Run tests
         run: mvn test
       - name: Create Jar
-        run: mvn compile
+        run: mvn package
       - name: Debug
         run: |
           
