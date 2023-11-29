@@ -2,13 +2,12 @@ name: Spring boot CI CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -16,8 +15,8 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: "17"
+          distribution: "temurin"
           cache: maven
       - name: install maven
         run: mvn clean install
@@ -27,20 +26,17 @@ jobs:
         run: mvn test
       - name: Debug
         run: |
-          
+
           echo "DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}"
           echo "DOCKERHUB_PWD: ${{ secrets.DOCKERHUB_PWD }}"
       - name: Login to Docker Hub
         uses: docker/login-action@v1
+
+      - name: Build and push
+        uses: mr-smithers-excellent/docker-build-push@v5
         with:
+          image: medboutaieb/spring-boot-jenkins
+          tags: latest
+          file: Dockerfile
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PWD }}
-      - name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          push: true
-          context: .
-          file: Dockerfile
-          tags: medboutaieb/spring-boot-jenkins:latest
-
-
