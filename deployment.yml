@@ -6,7 +6,7 @@ metadata:
   labels:
     app: spring-boot-jenkins
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: spring-boot-jenkins
   ports:
