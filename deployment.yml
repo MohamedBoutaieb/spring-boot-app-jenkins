@@ -1,0 +1,42 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-jenkins
+  labels:
+    app: spring-boot-jenkins
+spec:
+  type: NodePort
+  selector:
+    app: spring-boot-jenkins
+  ports:
+  - protocol: TCP
+    port: 8080
+    name: http
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-jenkins
+spec:
+  selector:
+    matchLabels:
+      app: spring-boot-jenkins
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: spring-boot-jenkins
+    spec:
+      containers:
+      - name: spring-boot-jenkins
+        image: medboutaieb/spring-boot-jenkins:latest
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          timeoutSeconds: 1
