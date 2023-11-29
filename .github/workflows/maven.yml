@@ -33,7 +33,7 @@ jobs:
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
           image: medboutaieb/spring-boot-jenkins
-          tags: latest
+          tags: 3.0.0
           registry: docker.io
           file: Dockerfile
           username: ${{ secrets.DOCKERHUB_USERNAME }}
