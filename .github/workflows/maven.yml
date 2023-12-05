@@ -46,11 +46,7 @@ jobs:
          version: 'v1.24.0' # default is latest stable
         id: install
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_KEY }}
-          aws-region: us-east-1
+        run: "Configure AWS Credentials"
       - name: Deploy to EKS
         run: |
           aws eks update-kubeconfig --name springboot-cluster
