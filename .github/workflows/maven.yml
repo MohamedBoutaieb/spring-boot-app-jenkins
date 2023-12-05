@@ -12,6 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name : verify and deploy infrastructure with terraform
+        run : echo "verify and deploy infrastructure"
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -53,4 +55,6 @@ jobs:
         run: |
           aws eks update-kubeconfig --name springboot-cluster
           kubectl apply -f deployment.yml
-          
+      
+      - name: Deploy Grafana and Prometheus
+        run: "echo Deploy Grafana and Prometheus"
